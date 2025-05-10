@@ -6,7 +6,6 @@ Tired of endless scrolling and group debates about what to watch? MovieMixer lev
 - **Democratic Selection** - Minimum 2 movie contributions per user prevents preference dominance
 - **Real-Time Collaboration** - Instant lobby system with shareable codes
 - **Responsive Design** - Works seamlessly across all devices
-## 🛠️ Technical Implementation
 ## 📈 Why This Stands Out
 This project exemplifies best practices in human-centered AI design:
 Transparent Decision-Making - Clear criteria for recommendations

@@ -1,5 +1,6 @@
-# 🎬 MovieMixer - AI-Powered Group Watchlist Harmonizer
+# 🎬 MovieMixer - AI-Powered Group Watchlist Harmonizer http://moviemixer.ddns.net/
 ## 🌟 The Smarter Way to Decide What to Watch
+Site to view : http://moviemixer.ddns.net/
 Tired of endless scrolling and group debates about what to watch? MovieMixer leverages **Google's Gemini AI** to analyze your group's movie preferences and generate recommendations everyone will enjoy. Our intelligent algorithm ensures fair representation of all tastes while eliminating decision fatigue.
 ## 🚀 Key Features
 - **AI-Powered Consensus Building** - Gemini LLM processes group inputs to find perfect cinematic matches

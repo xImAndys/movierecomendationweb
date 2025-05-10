@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby - Movie Mixer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Mixer</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main class="lobby">
+        <h2>Lobby: <%= lobby.code %></h2>
+        <p class="lobby-code">Share this code with friends: <strong><%= lobby.code %></strong></p>
+        
+        <div class="lobby-members">
+            <h3>Members</h3>
+            <ul>
+                <% lobby.members.forEach(member => { %>
+                    <li><%= member.username %></li>
+                <% }); %>
+            </ul>
+        </div>
+        
+        <div class="movies-section">
+            <h3>Suggested Movies</h3>
+            <% 
+                const userMovieCount = lobby.movies.filter(movie => 
+                    movie.addedBy && movie.addedBy._id.equals(user._id)
+                ).length;
+            %>
+            
+            <form action="/lobby/<%= lobby.code %>/add-movie" method="POST">
+                <input type="text" name="movie" placeholder="Enter a movie you like" required
+                    <%= userMovieCount >= 3 ? 'disabled' : '' %>>
+                <button type="submit" class="btn" <%= userMovieCount >= 3 ? 'disabled' : '' %>>Add Movie</button>
+            </form>
+            
+            <% if (userMovieCount >= 3) { %>
+                <p class="info-message">You've reached your maximum of 3 movies.</p>
+            <% } else { %>
+                <p class="info-message">You can add <%= 3 - userMovieCount %> more movies (minimum 2 required).</p>
+            <% } %>
+            
+            <ul class="movie-list">
+                <% lobby.movies.forEach(movie => { %>
+                    <li>
+                        <%= movie.title %>
+                        <span class="movie-added-by">(added by <%= movie.addedBy.username %>)</span>
+                        <% if (isCreator || movie.addedBy._id.equals(user._id)) { %>
+                            <form action="/lobby/<%= lobby.code %>/remove-movie" method="POST" class="remove-movie-form">
+                                <input type="hidden" name="movieId" value="<%= movie._id %>">
+                                <button type="submit" class="btn secondary light-blue">Remove</button>
+                            </form>
+                        <% } %>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+        
+        <% if (isCreator) { %>
+            <form action="/lobby/<%= lobby.code %>/generate" method="POST" class="generate-form">
+                <% 
+                    const allMembersHaveEnough = lobby.members.every(member => {
+                        const count = lobby.movies.filter(movie => 
+                            movie.addedBy && movie.addedBy._id.equals(member._id)
+                        ).length;
+                        return count >= 2;
+                    });
+                %>
+                <button type="submit" class="btn generate-btn" 
+                    <%= allMembersHaveEnough ? '' : 'disabled' %>>
+                    Generate Recommendations
+                </button>
+                <% if (!allMembersHaveEnough) { %>
+                    <p class="info-message">All members must add at least 2 movies before generating recommendations.</p>
+                <% } %>
+            </form>
+        <% } %>
+        
+        <% if (lobby.recommendations && lobby.recommendations.length > 0) { %>
+            <div class="recommendations">
+                <h3>Recommended Movies</h3>
+                <ol>
+                    <% lobby.recommendations.forEach(movie => { %>
+                        <li>
+                            <strong><%= movie.title %></strong>
+                            <% if (movie.description) { %>
+                                <p><%= movie.description %></p>
+                            <% } %>
+                        </li>
+                    <% }); %>
+                </ol>
+            </div>
+        <% } else if (isCreator && lobby.movies.length > 0) { %>
+            <div class="recommendations">
+                <p>No recommendations generated yet. Click "Generate Recommendations" to get suggestions.</p>
+            </div>
+        <% } %>
+    </main>
+    
+    <script src="/js/script.js"></script>
+</body>
+</html>

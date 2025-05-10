@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Mixer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Mixer</h1>
+        <nav>
+            <% if (user) { %>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            <% } %>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h2>Find movies everyone will enjoy</h2>
+            <p>Create a lobby, invite friends, and get personalized movie recommendations based on everyone's preferences.</p>
+            
+            <div class="action-buttons">
+                <% if (user) { %>
+                    <form action="/create-lobby" method="POST">
+                    <button type="submit" class="btn secondary light-blue">Create Lobby</button>
+                    </form>
+                    <a href="/join-lobby" class="btn secondary">Join Lobby</a>
+                <% } else { %>
+                    <a href="/login" class="btn">Get Started</a>
+                <% } %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

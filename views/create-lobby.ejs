@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Lobby - Movie Mixer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Mixer</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main class="lobby-create">
+        <h2>Create a New Lobby</h2>
+        <p>After creating the lobby, share the code with your friends so they can join.</p>
+        
+        <form action="/create-lobby" method="POST">
+            <button type="submit" class="btn">Create Lobby</button>
+        </form>
+    </main>
+</body>
+</html>

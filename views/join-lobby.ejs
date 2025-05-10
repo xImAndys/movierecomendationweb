@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Lobby - Movie Mixer</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Mixer</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main class="join-lobby">
+        <h2>Join an Existing Lobby</h2>
+        <form action="/join-lobby" method="POST">
+            <div class="form-group">
+                <label for="lobbyCode">Enter Lobby Code</label>
+                <input type="text" id="lobbyCode" name="lobbyCode" required placeholder="e.g., ABC123">
+            </div>
+            <button type="submit" class="btn">Join Lobby</button>
+        </form>
+    </main>
+</body>
+</html>
